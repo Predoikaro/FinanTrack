@@ -131,10 +131,32 @@ botaoSalvar.addEventListener("click", () => {
     console.log(campoData.value);
 
     const novaTransacao = {
-    descricao: campoDescricao.value,
-    categoria: campoCategoria.value,
-    tipo: campoTipo.value,
-    valor: valor,
-    data: campoData.value
-};
+
+        descricao: campoDescricao.value,
+
+        categoria: campoCategoria.value,
+
+        tipo: campoTipo.value,
+
+        valor: valor,
+
+        data: campoData.value
+
+    };
+
+
+    console.log(novaTransacao);
+
+    transacoes.push(novaTransacao);
+
+    atualizarResumo();
+
+    renderizarTransacao(novaTransacao);
+
+    campoDescricao.value = "";
+    campoCategoria.value = "";
+campoValor.value = "";
+campoData.value = "";
+
 });
+
