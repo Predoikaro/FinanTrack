@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FinanTrack | Controle Financeiro</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <!-- BARRA LATERAL -->
+        <aside class="sidebar">
+
+            <div class="logo">
+                <h2>Finan<span>Track</span></h2>
+            </div>
+
+            <nav class="menu">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Transações</a>
+                <a href="#">Categorias</a>
+                <a href="#">Metas financeiras</a>
+                <a href="#">Relatórios</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>FinanTrack © 2026</p>
+                <span>Seu dinheiro. Seu controle.</span>
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-content">
+
+            <!-- CABEÇALHO -->
+            <header class="topbar">
+
+                <div>
+                    <h3>Dashboard</h3>
+                    <p>Visão geral das suas finanças</p>
+                </div>
+
+                <button id="addTransaction">
+                    + Nova transação
+                </button>
+
+                <div id="transactionForm" style="display: none;">
+                    <label for="descricao">Descrição</label>
+                    <input type="text" id="descricao" placeholder="Ex: Salário">
+                    
+                    <label for="categoria">Categoria</label>
+                    <input type="text" id="categoria" placeholder="Ex: Trabalho">
+
+                    <label for="tipo">Tipo</label>
+                    <select id="tipo">
+                        <option value="receita">Receita</option>
+                        <option value="despesa">Despesa</option>
+                    </select>
+
+                    <label for="valor">Valor</label>
+                    <input type="number" id="valor" placeholder="Ex: 1000,00">
+
+                    <label for="data">Data</label>
+                    <input type="date" id="data">
+
+                    <button id="saveTransaction">Adicionar transação</button>
+                </div>
+
+            </header>
+
+            <!-- SAUDAÇÃO -->
+            <section class="welcome">
+                <h1>Olá, Pedro 👋</h1>
+                <p>Acompanhe sua vida financeira em um só lugar.</p>
+            </section>
+
+            <!-- CARDS FINANCEIROS -->
+            <section class="cards-container">
+
+                <div class="card">
+                    <p>Saldo total</p>
+                    <h2 id="balance">R$ 0,00</h2>
+                    <span>Seu saldo disponível</span>
+                </div>
+
+                <div class="card">
+                    <p>Receitas</p>
+                    <h2 id="income">R$ 0,00</h2>
+                    <span>Total de entradas</span>
+                </div>
+
+                <div class="card">
+                    <p>Despesas</p>
+                    <h2 id="expense">R$ 0,00</h2>
+                    <span>Total de saídas</span>
+                </div>
+
+                <div class="card">
+                    <p>Economia</p>
+                    <h2 id="savings">0%</h2>
+                    <span>Percentual economizado</span>
+                </div>
+
+            </section>
+
+            <!-- ÁREA DOS GRÁFICOS -->
+            <section class="dashboard-grid">
+
+                <div class="panel chart-panel">
+                    <h3>Fluxo financeiro</h3>
+                    <p>Receitas e despesas ao longo do tempo</p>
+
+                    <div class="chart-placeholder">
+                        Gráfico financeiro
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Despesas por categoria</h3>
+                    <p>Onde você está gastando</p>
+
+                    <div class="chart-placeholder">
+                        Gráfico de categorias
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- TRANSAÇÕES -->
+            <section class="panel transactions-panel">
+
+                <div class="section-header">
+                    <div>
+                        <h3>Transações recentes</h3>
+                        <p>Suas últimas movimentações</p>
+                    </div>
+
+                    <button id="viewTransactions">
+                        Ver todas
+                    </button>
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Descrição</th>
+                                <th>Categoria</th>
+                                <th>Data</th>
+                                <th>Valor</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionList">
+                            <!-- Transações serão inseridas pelo JavaScript -->
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
