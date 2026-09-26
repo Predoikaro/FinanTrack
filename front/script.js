@@ -29,9 +29,11 @@ adicionarTransacao(
     "20/09/2026"
 );
 
+
 const listaTransacoes = document.getElementById("transactionList");
 
-transacoes.forEach((transacao) => {
+
+function renderizarTransacao(transacao) {
 
     const linha = document.createElement("tr");
 
@@ -54,65 +56,106 @@ transacoes.forEach((transacao) => {
     });
     linha.appendChild(celulaValor);
 
+    const celulaTipo = document.createElement("td");
+    celulaTipo.textContent = transacao.tipo;
+    linha.appendChild(celulaTipo);
+
     listaTransacoes.appendChild(linha);
+}
 
-});
 
-let totalReceitas = 0;
+function atualizarResumo() {
 
+    console.log("ATUALIZAR RESUMO FOI EXECUTADO");
+
+    let totalReceitas = 0;
+
+    transacoes.forEach((transacao) => {
+
+        if (transacao.tipo === "receita") {
+            totalReceitas += transacao.valor;
+        }
+
+    });
+
+
+    let totalDespesas = 0;
+
+    transacoes.forEach((transacao) => {
+
+        if (transacao.tipo === "despesa") {
+            totalDespesas += transacao.valor;
+        }
+
+    });
+
+
+    let saldo = totalReceitas - totalDespesas;
+
+    console.log(saldo);
+
+
+    const saldoElemento = document.getElementById("balance");
+
+    saldoElemento.textContent = saldo.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+
+
+    const receitasElemento = document.getElementById("income");
+
+    receitasElemento.textContent = totalReceitas.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+
+
+    const despesasElemento = document.getElementById("expense");
+
+    despesasElemento.textContent = totalDespesas.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+
+
+    let economia = saldo / totalReceitas * 100;
+
+    const porcentagemElemento = document.getElementById("savings");
+
+    porcentagemElemento.textContent = economia.toFixed(1) + "%";
+}
+
+
+// Executa o resumo inicial
+atualizarResumo();
+
+
+// Renderiza as transações iniciais
 transacoes.forEach((transacao) => {
 
-    if (transacao.tipo === "receita") {
-        totalReceitas += transacao.valor;
-    }
+    renderizarTransacao(transacao);
 
 });
 
-let totalDespesas = 0;
-
-transacoes.forEach((transacao) => {
-
-    if (transacao.tipo === "despesa") {
-        totalDespesas += transacao.valor;
-    }
-});
-
-let saldo = totalReceitas - totalDespesas;
-
-console.log(saldo);
-
-const saldoElemento = document.getElementById("balance");
-
-saldoElemento.textContent = saldo.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-});
-
-const receitasElemento = document.getElementById("income");
-receitasElemento.textContent = totalReceitas.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-});
-
-const despesasElemento = document.getElementById("expense");
-despesasElemento.textContent = totalDespesas.toLocaleString("pt-BR", {
-    style: "currency",
-    currency: "BRL"
-});
-
-let economia = saldo / totalReceitas * 100
-
-const porcentagemElemento = document.getElementById("savings");
-porcentagemElemento.textContent = economia + "%";
 
 const botaoAdicionar = document.getElementById("addTransaction");
+
 const formularioTransacao = document.getElementById("transactionForm");
 
+
 const campoDescricao = document.getElementById("descricao");
+
 const campoCategoria = document.getElementById("categoria");
+
 const campoTipo = document.getElementById("tipo");
+
 const campoValor = document.getElementById("valor");
+
 const campoData = document.getElementById("data");
+
+const botaoSalvar = document.getElementById("saveTransaction");
+
 
 botaoAdicionar.addEventListener("click", () => {
 
@@ -120,15 +163,22 @@ botaoAdicionar.addEventListener("click", () => {
 
 });
 
-const botaoSalvar = document.getElementById("saveTransaction");
 
 botaoSalvar.addEventListener("click", () => {
 
     console.log(campoDescricao.value);
+
     console.log(campoCategoria.value);
+
     console.log(campoTipo.value);
+
     console.log(campoValor.value);
+
     console.log(campoData.value);
+
+
+    const valor = Number(campoValor.value);
+
 
     const novaTransacao = {
 
@@ -155,8 +205,9 @@ botaoSalvar.addEventListener("click", () => {
 
     campoDescricao.value = "";
     campoCategoria.value = "";
-campoValor.value = "";
-campoData.value = "";
+    campoValor.value = "";
+    campoData.value = "";
+    campoTipo.value = "receita"
 
 });
 
